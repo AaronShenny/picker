@@ -83,12 +83,19 @@ export default function Dashboard() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                  className="text-center"
+                  className="text-center w-full px-4"
                 >
                   <p className="text-[#444] text-xs font-mono tracking-widest mb-3">
                     #{revealedStudent.roll_no}
                   </p>
-                  <h2 className="font-display text-6xl text-white leading-tight">
+                  <h2
+                    className="font-display text-white leading-tight break-words"
+                    style={{
+                      fontSize: revealedStudent.name.length > 20
+                        ? revealedStudent.name.length > 30 ? '2.25rem' : '3rem'
+                        : '4rem',
+                    }}
+                  >
                     {revealedStudent.name}
                   </h2>
                 </motion.div>
@@ -139,15 +146,15 @@ export default function Dashboard() {
                     initial={{ opacity: 0, x: 10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    className="flex items-center justify-between px-5 py-3.5 hover:bg-[#141414] transition-colors"
+                    className="flex items-center justify-between gap-3 px-5 py-3.5 hover:bg-[#141414] transition-colors min-w-0"
                   >
-                    <div>
-                      <p className="text-sm font-medium text-white">{record.student_name}</p>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium text-white truncate">{record.student_name}</p>
                       <p className="text-xs text-[#444] mt-0.5">
                         {new Date(record.selected_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </p>
                     </div>
-                    <span className="text-xs font-mono text-[#333]">#{record.roll_no}</span>
+                    <span className="text-xs font-mono text-[#333] shrink-0">#{record.roll_no}</span>
                   </motion.div>
                 ))}
               </div>
