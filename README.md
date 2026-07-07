@@ -1,32 +1,52 @@
-# React + TypeScript + Vite
+# Classroom Q&A Picker - Completed 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+The Classroom Q&A Picker has been successfully built! Here's a breakdown of the completed features and the tech stack used.
 
-Currently, two official plugins are available:
+## 🏗️ Architecture & Stack
+- **Frontend**: React + TypeScript + Vite
+- **Styling**: Tailwind CSS + shadcn/ui components
+- **Animations**: Framer Motion for smooth transitions and suspense
+- **Database & Auth**: Supabase
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ Features Implemented
 
-## React Compiler
+### 1. Dashboard & Selection Engine
+The core of the app. It uses a fair selection algorithm (Fisher-Yates shuffle) that ensures no student is picked twice in the same cycle. 
+- Features a premium Glassmorphism design and glowing aesthetics.
+- Includes a 2-second suspense animation (`FlickerSpinner`) before revealing the student.
+- Automatically increments the cycle and reshuffles when all active students have been picked.
+- Shows the last 5 selections in a clean side panel.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 2. Roster Management (Students Page)
+A real-time data table showing all students.
+- You can mark students as **Present** or **Absent** with a single click.
+- Absent students are automatically skipped during the selection process without interrupting the flow.
 
-## Expanding the Oxlint configuration
+### 3. History Page
+A complete log of every selection ever made.
+- Shows timestamp, cycle number, roll number, and name.
+- Useful for auditing or reviewing past classes.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+### 4. Settings & CSV Upload
+- **Upload Roster**: Teachers can upload a CSV file with `roll_no` and `name` columns.
+- **Danger Zone**: 
+  - Reset the current cycle (starts over without deleting history).
+  - Clear all history permanently.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+### 5. Secure Authentication
+- A secure login portal powered by Supabase.
+- Only the teacher with the correct credentials can access and manage the app.
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## 🚀 Deployment
+I have set up a GitHub Actions workflow in `.github/workflows/deploy.yml` that will automatically build and deploy the app to GitHub Pages whenever you push to the `main` or `master` branch.
+
+All secrets (`VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`) need to be added to your GitHub repository secrets for the action to build successfully.
+
+## ✅ Next Steps for You
+1. Add the Supabase credentials to your GitHub repository secrets:
+   - `VITE_SUPABASE_URL`
+   - `VITE_SUPABASE_ANON_KEY`
+2. Push this repository to GitHub.
+3. Your app will be live on GitHub Pages!
+
+Enjoy your new premium Classroom Q&A Picker!
